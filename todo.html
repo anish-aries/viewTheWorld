@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title> Vue Todo </title>
+
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>Vue Todo List </h1>
+            <input type="text" v-model="newTodo" @keyup.enter ="addTodo">
+            <ul>
+                <li v-for="(todo, index) in todos" :key="index">
+                    {{ todo }}
+                    <button @click="removeTodo(index)"> Remove </button>
+                </li>
+            </ul>
+        </div> 
+        
+        <script>
+            new Vue({
+                el: '#app',
+                data: {      // v-model = data................
+                 newTodo:'',
+                 todos:[]  // loop like....
+                },
+                
+                
+                methods: {
+                    addTodo() 
+                    {
+                        if(this.newTodo.trim() !== '')
+                        {
+                            this.todos.push(this.newTodo);
+                            this.newTodo = '';
+                        }
+                    },
+
+                    removeTodo(index)
+                    {
+                        this.todos.splice(index, 1);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
